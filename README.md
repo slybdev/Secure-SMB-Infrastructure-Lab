@@ -1046,6 +1046,8 @@ All systems forward logs to the centralized Splunk server.
    ```
 
 6. Complete initial setup and create admin account
+<img width="1436" height="947" alt="Screenshot 2026-01-28 154254" src="https://github.com/user-attachments/assets/0e3fdca9-1b09-4640-a421-c059d5ef76cb" />
+
 
 ---
 
@@ -1065,13 +1067,11 @@ Forward Windows Event Logs and system data to Splunk.
 
 1. Download Splunk Universal Forwarder for Windows
 2. Install with admin privileges
-3. Configure deployment or manual receiver
+3. Configure deployment
+4. installed sysmon(olafconfig)
+5. configured the inputs.conf
 
-### Configure Forwarding Target:
 
-```powershell
-"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe" add forward-server 192.168.20.20:9997
-```
 
 ### Enable Inputs:
 
@@ -1081,29 +1081,14 @@ Forward Windows Event Logs and system data to Splunk.
   * System
   * Application
 
-### Start Forwarder Service:
+<img width="836" height="724" alt="Screenshot 2026-01-28 133412" src="https://github.com/user-attachments/assets/afd37abe-beba-406a-bef7-a9933faefd74" />
+<img width="1426" height="643" alt="Screenshot 2026-01-28 134204" src="https://github.com/user-attachments/assets/590b5179-c795-4d44-a514-0a22e16f1b01" />
+<img width="816" height="593" alt="Screenshot 2026-01-28 134428" src="https://github.com/user-attachments/assets/feb10839-e324-41fe-b219-9c13b8c6387c" />
 
-```powershell
-net start splunkforwarder
-```
+<img width="1430" height="830" alt="Screenshot 2026-01-28 204506" src="https://github.com/user-attachments/assets/a0de09ef-c91c-480d-a034-f14efc6a7632" />
+<img width="1919" height="867" alt="Screenshot 2026-01-28 203740" src="https://github.com/user-attachments/assets/c573810c-5e43-42eb-bb33-4e6bab42e466" />
+<img width="1429" height="864" alt="Screenshot 2026-01-28 204709" src="https://github.com/user-attachments/assets/0e429bc8-9e75-420f-8e9d-9eea66b10f93" />
 
----
-
-## 6.4 Universal Forwarder Deployment (Linux Hosts)
-
-Universal Forwarder installed on:
-
-* Ubuntu Server (if separate from Splunk indexer)
-* Linux systems for syslog and auth logs
-
-### Configure Inputs:
-
-```bash
-/opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
-/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog
-```
-
----
 
 ## 6.5 pfSense Firewall Log Forwarding (Syslog)
 
@@ -1129,23 +1114,14 @@ Capture:
 * Inter-VLAN attempts
 * VPN activity
 * Suspicious traffic
+<img width="1428" height="936" alt="Screenshot 2026-01-28 211041" src="https://github.com/user-attachments/assets/bc84ffec-d7af-4d87-8a95-f798b5719e5f" />
 
+<img width="1433" height="866" alt="Screenshot 2026-01-29 085239" src="https://github.com/user-attachments/assets/3eab51e4-cd40-4711-9e36-562472741994" />
 ---
 
-## 6.6 Splunk Receiving Configuration
 
-On Splunk Enterprise:
 
-### Enable Receiving Port:
 
-```bash
-/opt/splunk/bin/splunk enable listen 9997
-```
-
-### Configure UDP Syslog Input:
-
-* Port: 9969
-* Source Type: pfSense / syslog
 
 ---
 
@@ -1226,14 +1202,6 @@ This Splunk deployment transforms the environment from basic IT into a **securit
 
 ---
 
-➡️ **Next Section:**
-Backups, Disaster Recovery & Business Continuity Strategy
-
-Perfect — this deserves its **own clean subsection** in your documentation. This shows you understand **network-to-SIEM integration**, which is enterprise-level thinking.
-
-Here’s a **portfolio-ready subsection** you can drop straight into Section 6 or as **Section 6.11**.
-
----
 
 ## 6.11 pfSense Firewall Syslog Integration with Splunk (UDP 9969)
 
@@ -1290,11 +1258,9 @@ Status → System Logs → Settings → Remote Logging
 
 ### Log Types Enabled:
 
-- Firewall Events
-- System Events
-- VPN Events
-- DHCP Logs
-- DNS Resolver Logs
+-Everything
+<img width="1428" height="936" alt="Screenshot 2026-01-28 211041" src="https://github.com/user-attachments/assets/826063e9-195e-44a8-acd2-3fb785ba5481" />
+<img width="1433" height="866" alt="Screenshot 2026-01-29 085239" src="https://github.com/user-attachments/assets/fa150896-a1be-42b4-aa65-9e8d8c380cfe" />
 
 ---
 
@@ -1313,7 +1279,7 @@ On the Splunk Enterprise server:
 |----------------|----------------|
 | Port           | 9969           |
 | Source Type    | syslog / pfSense |
-| Index          | main / firewall |
+| Index          | pfsense_firewall |
 | Host           | pfSense        |
 
 ---
@@ -1370,13 +1336,7 @@ pfSense is fully integrated with Splunk, allowing:
 
 This completes full-stack visibility across firewall, servers, and endpoints.
 
----
 
-➡️ **Next Section:**  
-Backups, Disaster Recovery & Business Continuity Planning
-
-
----
 
 
 ## ➡️ Section 7: Backups, Disaster Recovery & Business Continuity Strategy
